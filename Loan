@@ -1,0 +1,44 @@
+Yangyang Lian
+07/24/2023
+
+def getInput(msg):
+while True:
+userInput=float(input(msg))
+if(userInput>0):
+return userInput
+else:
+print("You must enter a positive number!")
+
+def calculateIntrest(amount,rate):
+return amount*rate/100
+
+def calculateRemainingAmount(amount,interest,monthlyPayment):
+return (amount+interest-monthlyPayment)
+
+def main():
+amount=getInput("How much amount you want to borrow?$")
+rate=getInput("What is the annual interest rate expressed as a percent?")
+while True:
+monthlyPayment=getInput("What is the monthly payment amount?$")
+if(monthlyPayment<amount):
+break
+print("Monthly payment should be less than borrow amount")
+
+rate/=12
+count=0;
+totalAmountPaid=0
+while True:
+interest=calculateIntrest(amount,rate)
+reamainingAmount=calculateRemainingAmount(amount,interest,monthlyPayment)
+if(reamainingAmount>0):
+count+=1
+totalAmountPaid+=(interest+monthlyPayment)
+amount=reamainingAmount
+else:
+count+=1
+totalAmountPaid+=amount
+print("Your debt will be paid off after {:d} months, with a final payment of just ${:.2f} ".format(count,amount))
+print("The total amount of interest you will pay during that time is ${:.2f} ".format(totalAmountPaid))
+break
+if __name__ == '__main__':
+main()
